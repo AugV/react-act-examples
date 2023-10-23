@@ -1,6 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Timers from './timers/Timers';
 
 function App() {
   return (
@@ -19,6 +20,8 @@ function App() {
           Learn React
         </a>
       </header>
+
+      <Timers/>
     </div>
   );
 }
