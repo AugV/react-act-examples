@@ -1,6 +1,5 @@
 import Timers from './Timers';
-import { render, screen ,act, fireEvent, waitFor} from '@testing-library/react';
-import userEvent from '@testing-library/user-event'
+import { render, screen ,act} from '@testing-library/react';
 
 jest.useFakeTimers()
 
