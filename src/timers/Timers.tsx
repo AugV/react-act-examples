@@ -13,7 +13,6 @@ const Timers = () => {
     <div>
       <p>Timers</p>
       <p>{content}</p>
-      <button>Test</button>
     </div>
   );
 };

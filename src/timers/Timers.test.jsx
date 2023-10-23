@@ -26,10 +26,6 @@ describe('timers correct tests', () => {
       jest.runOnlyPendingTimers();
     })
 
-     act(async ()=> {
-      jest.runOnlyPendingTimers();
-    })
-
     expect(screen.getByText('2')).toBeTruthy();
   });
 });

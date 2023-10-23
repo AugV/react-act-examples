@@ -2,6 +2,7 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Timers from './timers/Timers';
+import TimersLoop from './timersLoop/TimersLoop';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
       </header>
 
       <Timers/>
+      <TimersLoop/>
     </div>
   );
 }
