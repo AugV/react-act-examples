@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import Timers from './timers/Timers';
 import TimersLoop from './timersLoop/TimersLoop';
+import RenderAct from './renderAct/RenderAct';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
 
       <Timers/>
       <TimersLoop/>
+      <RenderAct/>
     </div>
   );
 }
