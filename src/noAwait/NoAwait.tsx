@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const NoAwait = () => {
   const [isContentVisible, setIsContentVisible] = React.useState(false);
@@ -6,12 +6,14 @@ const NoAwait = () => {
   return (
     <div>
       <p>NoAwait</p>
-      <button onClick={()=>{
-        setTimeout( ()=> {
-          // intentionally incorrect
-          setIsContentVisible(true)
-        }, 500)
-      }}>
+      <button
+        onClick={() => {
+          setTimeout(() => {
+            // intentionally incorrect
+            setIsContentVisible(true);
+          }, 500);
+        }}
+      >
         Toggle content
       </button>
       {isContentVisible ? <div>Content</div> : null}
