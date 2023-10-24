@@ -4,6 +4,7 @@ import './App.css';
 import Timers from './timers/Timers';
 import TimersLoop from './timersLoop/TimersLoop';
 import RenderAct from './renderAct/RenderAct';
+import NoAwait from './noAwait/NoAwait';
 
 function App() {
   return (
@@ -23,9 +24,10 @@ function App() {
         </a>
       </header>
 
-      <Timers/>
-      <TimersLoop/>
-      <RenderAct/>
+      <Timers />
+      <TimersLoop />
+      <RenderAct />
+      <NoAwait />
     </div>
   );
 }
