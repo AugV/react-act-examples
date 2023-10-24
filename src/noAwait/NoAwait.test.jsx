@@ -2,6 +2,8 @@ import { userEvent } from "@testing-library/user-event";
 import { render, screen, waitFor } from "@testing-library/react";
 import NoAwait from "./NoAwait";
 
+// ❗ False positives also occur when not awaiting eventually
+
 it("❌ false positive when not awaiting waitFor", async () => {
   render(<NoAwait />);
 
