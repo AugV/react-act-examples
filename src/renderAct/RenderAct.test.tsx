@@ -1,15 +1,12 @@
-import { render, screen } from '@testing-library/react';
-import RenderAct from './RenderAct';
+import { render, act } from "@testing-library/react";
+import RenderAct from "./RenderAct";
 
+it("❌ throws act warning when rendering initially open popover", async () => {
+  render(<RenderAct />);
+});
 
-describe('throws act warning when rendering', () => {
-
-  
-  it('incorrect', async () => {
-
-    render(<RenderAct/>);
-
-   expect(await screen.findByText("img loaded")).toBeTruthy();
-
-  }, );
+it("✅ act warning is fixed by wrapping render with async act", async () => {
+  await act(async () => {
+    render(<RenderAct />);
+  });
 });
