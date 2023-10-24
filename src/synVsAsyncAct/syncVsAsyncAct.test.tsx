@@ -14,7 +14,7 @@ function DataDisplay({ req }: { req: () => Promise<any> }) {
 }
 
 describe("sync vs async act", () => {
-  it("fails - with sync act", async () => {
+  it("❌ fails with sync act", async () => {
     let resolve: (value: unknown) => void;
     const mockProm = () =>
       new Promise((res) => {
@@ -30,7 +30,7 @@ describe("sync vs async act", () => {
     expect(screen.getByText("Data: Some data from the API")).toBeTruthy();
   });
 
-  it("succeeds - with async act", async () => {
+  it("✅ succeeds with async act", async () => {
     let resolve: (value: unknown) => void;
     const mockProm = () =>
       new Promise((res) => {
