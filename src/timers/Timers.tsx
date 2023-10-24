@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const Timers = () => {
   const [content, setContent] = React.useState(1);
@@ -13,7 +13,6 @@ const Timers = () => {
     <div>
       <p>Timers</p>
       <p>{content}</p>
-      {/* <button/> */}
     </div>
   );
 };

@@ -1,30 +1,31 @@
-import Timers from './Timers';
-import { render, screen ,act} from '@testing-library/react';
+import Timers from "./Timers";
+import { render, screen, act } from "@testing-library/react";
 
-jest.useFakeTimers()
+jest.useFakeTimers();
 
-describe('timers tests with act warnings', () => {
-  it('increments number at intervals', async () => {
+describe("❌ running timers without wrapping in act throws act warning", () => {
+  it("increments number at intervals", async () => {
     render(<Timers />);
 
-    expect(screen.getByText('1')).toBeTruthy();
+    expect(screen.getByText("1")).toBeTruthy();
 
     jest.runOnlyPendingTimers();
 
-    expect(screen.getByText('2')).toBeTruthy();
+    // not using act also makes this assertion fail
+    expect(screen.getByText("2")).toBeTruthy();
   });
 });
 
-describe('timers correct tests', () => {
-  it('increments number at intervals', async () => {
+describe("✅ running timers without act warning", () => {
+  it("increments number at intervals", async () => {
     render(<Timers />);
 
-    expect(screen.getByText('1')).toBeTruthy();
+    expect(screen.getByText("1")).toBeTruthy();
 
-     act(async ()=> {
+    act(() => {
       jest.runOnlyPendingTimers();
-    })
+    });
 
-    expect(screen.getByText('2')).toBeTruthy();
+    expect(screen.getByText("2")).toBeTruthy();
   });
 });
