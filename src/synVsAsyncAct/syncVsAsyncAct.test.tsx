@@ -30,6 +30,8 @@ describe("sync vs async act", () => {
     expect(screen.getByText("Data: Some data from the API")).toBeTruthy();
   });
 
+  // ❗ async act is available since 16.9.0 React version
+
   it("✅ succeeds with async act", async () => {
     let resolve: (value: unknown) => void;
     const mockProm = () =>
