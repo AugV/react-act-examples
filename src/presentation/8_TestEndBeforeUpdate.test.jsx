@@ -27,19 +27,14 @@ function NewsletterForm({ updateNewsletter }) {
 }
 
 describe("NewsletterForm", () => {
-  const updateNewsletter = jest.fn();
-  const email = "bob.bobberson@gmail.com";
-  let emailInput, submitButton;
-
-  beforeEach(() => {
-    jest.clearAllMocks();
-    render(<NewsletterForm updateNewsletter={updateNewsletter} />);
-
-    emailInput = screen.getByRole("textbox");
-    submitButton = screen.getByRole("button");
-  });
-
   it("calls function", async () => {
+    const updateNewsletter = jest.fn();
+    const email = "bob.bobberson@gmail.com";
+
+    render(<NewsletterForm updateNewsletter={updateNewsletter} />);
+    const emailInput = screen.getByRole("textbox");
+    const submitButton = screen.getByRole("button");
+
     fireEvent.change(emailInput, { target: { value: email } });
     fireEvent.click(submitButton);
 

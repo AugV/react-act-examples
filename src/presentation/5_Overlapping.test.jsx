@@ -1,6 +1,5 @@
 import React from "react";
-import { render, screen, act } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
+import { render, screen, act, waitFor } from "@testing-library/react";
 
 const Timers = () => {
   const [content, setContent] = React.useState(1);
@@ -24,9 +23,12 @@ jest.useFakeTimers();
 it("increments number at intervals", async () => {
   render(<Timers />);
 
-  act(() => {
+  waitFor(async () => {
+    expect(screen.getByText("1")).toBeTruthy();
+  });
+  await act(async () => {
     jest.runOnlyPendingTimers();
   });
 
-  await userEvent.click(screen.getByText("2"));
+  expect(screen.getByText("2")).toBeTruthy();
 });

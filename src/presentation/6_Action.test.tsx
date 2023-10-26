@@ -8,7 +8,7 @@ export const TestComponent = () => {
   return (
     <>
       <button
-        onFocus={() => setTimeout(() => setShowTooltip(true), 1000)}
+        onFocus={() => setTimeout(() => setShowTooltip(true), 10)}
         onBlur={() => setShowTooltip(false)}
       >
         First Button

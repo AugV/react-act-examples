@@ -14,18 +14,18 @@ function DataDisplay({ req }: { req: () => Promise<any> }) {
 }
 
 it("fetches data", async () => {
-  let resolve: (value: unknown) => void;
-  const mockProm = () =>
+  let resolveFetchPromise: (value: unknown) => void;
+  const fetchDataMock = () =>
     new Promise((res) => {
-      resolve = res;
+      resolveFetchPromise = res;
     });
 
-  render(<DataDisplay req={mockProm} />);
+  render(<DataDisplay req={fetchDataMock} />);
 
   expect(screen.getByText("Loading...")).toBeTruthy();
   
   act(() => {
-    resolve("Some data from the API");
+    resolveFetchPromise("Some data from the API");
   });
 
   expect(screen.getByText("Data: Some data from the API")).toBeTruthy();

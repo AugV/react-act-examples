@@ -1,19 +1,18 @@
 import React from "react";
 import { userEvent } from "@testing-library/user-event";
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 
-const NoAwait = () => {
+const ToggleContent = () => {
   const [isContentVisible, setIsContentVisible] = React.useState(false);
 
   return (
     <div>
-      <p>NoAwait</p>
       <button
         onClick={() => {
           setTimeout(() => {
-            // intentionally incorrect
-            setIsContentVisible(true);
-          }, 500);
+            // intentionally incorrect - bug here
+            setIsContentVisible(prev => prev);
+          }, 500); 
         }}
       >
         Toggle content
@@ -24,17 +23,11 @@ const NoAwait = () => {
 };
 
 it("toggles content on button click", async () => {
-  render(<NoAwait />);
+  render(<ToggleContent />);
 
+  expect(screen.queryByText("Content")).toBeFalsy();
+  
   await userEvent.click(screen.getByRole("button"));
 
-  await waitFor(() => {
-    expect(screen.getByText("Content")).toBeTruthy();
-  });
-
-  await userEvent.click(screen.getByRole("button"));
-
-  waitFor(() => {
-    expect(screen.queryByText("Content")).toBeFalsy();
-  });
+  expect(screen.queryByText("Content")).toBeTruthy();
 });
