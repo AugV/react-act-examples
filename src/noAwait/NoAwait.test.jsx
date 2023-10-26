@@ -1,6 +1,27 @@
+import React from "react";
 import { userEvent } from "@testing-library/user-event";
 import { render, screen, waitFor } from "@testing-library/react";
-import NoAwait from "./NoAwait";
+
+const NoAwait = () => {
+  const [isContentVisible, setIsContentVisible] = React.useState(false);
+
+  return (
+    <div>
+      <p>NoAwait</p>
+      <button
+        onClick={() => {
+          setTimeout(() => {
+            // intentionally incorrect
+            setIsContentVisible(true);
+          }, 500);
+        }}
+      >
+        Toggle content
+      </button>
+      {isContentVisible ? <div>Content</div> : null}
+    </div>
+  );
+};
 
 // ❗ False positives also occur when not awaiting eventually
 

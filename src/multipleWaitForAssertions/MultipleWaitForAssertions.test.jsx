@@ -1,9 +1,20 @@
+import React from "react";
 import { render, screen, waitFor } from "@testing-library/react";
-import {
-  MultipleWaitForAssertionsFunction,
-  MultipleWaitForAssertionsElement,
-} from "./MultipleWaitForAssertions";
 import { userEvent } from "@testing-library/user-event";
+
+const MultipleWaitForAssertionsFunction = ({ onClick }) => {
+  return (
+    <button
+      onClick={() => {
+        setTimeout(() => {
+          onClick("test");
+        }, 500);
+      }}
+    >
+      Test
+    </button>
+  );
+};
 
 describe("with function callback", () => {
   it("❌ having multiple assertions in waitFor makes test takes longer to fail", async () => {
@@ -31,6 +42,24 @@ describe("with function callback", () => {
     expect(onClick).toHaveBeenCalledTimes(1);
   });
 });
+
+const MultipleWaitForAssertionsElement = () => {
+  const [isButtonVisible, setIsButtonVisible] = React.useState(false);
+
+  React.useEffect(() => {
+    setTimeout(() => {
+      setIsButtonVisible(true);
+    }, 500);
+  }, []);
+
+  return (
+    <div>
+      <h1>Title</h1>
+      <p>Description</p>
+      {isButtonVisible ? <button>Test</button> : <div>Loading button</div>}
+    </div>
+  );
+};
 
 describe("with asynchronously rendered element", () => {
   it("❌ querying syncronously rendered elements in waitFor", async () => {

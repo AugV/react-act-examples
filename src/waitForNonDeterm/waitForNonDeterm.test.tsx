@@ -1,6 +1,24 @@
+import React from "react";
 import { render, screen, waitFor } from "@testing-library/react";
-import { TestComponent } from "./TestComponent";
 import userEvent from "@testing-library/user-event";
+
+export const TestComponent = () => {
+  const [showTooltip, setShowTooltip] = React.useState(false);
+
+  return (
+    <>
+      <button
+        onFocus={() => setTimeout(() => setShowTooltip(true), 1000)}
+        onBlur={() => setShowTooltip(false)}
+      >
+        First Button
+      </button>
+      <button>Second Button</button>
+      <button>Third Button</button>
+      {showTooltip && <div>Ultimate tooltip</div>}
+    </>
+  );
+};
 
 describe("non-deterministic action and waitFor", () => {
   it("fails - when action is inside waitFor", async () => {

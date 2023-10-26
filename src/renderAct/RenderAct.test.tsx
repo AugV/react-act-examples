@@ -1,5 +1,26 @@
+import React from "react";
 import { render, act } from "@testing-library/react";
-import RenderAct from "./RenderAct";
+import Popper from "./Popper";
+
+const RenderAct = () => {
+  const popperRef = React.useRef(null);
+
+  return (
+    <div style={{ padding: "50px" }}>
+      <button id="test">Toggle popover</button>
+      {/* @ts-ignore */}
+      <Popper
+        initOpen={true}
+        ref={popperRef}
+        placement="bottom"
+        target="test"
+        toggle="legacy"
+      >
+        Popover content
+      </Popper>
+    </div>
+  );
+};
 
 it("❌ throws act warning when rendering initially open popover", async () => {
   render(<RenderAct />);
