@@ -39,7 +39,7 @@ describe("NewsletterForm", () => {
     submitButton = screen.getByRole("button");
   });
 
-  it("❌ - because the state updates don't settle soon enough", async () => {
+  it("calls function", async () => {
     fireEvent.change(emailInput, { target: { value: email } });
     fireEvent.click(submitButton);
 

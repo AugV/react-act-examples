@@ -48,15 +48,13 @@ const MultipleWaitForAssertionsElement = () => {
   );
 };
 
-describe("with asynchronously rendered element", () => {
-  it("❌ querying syncronously rendered elements in waitFor", async () => {
-    render(<MultipleWaitForAssertionsElement />);
+it("renders correctly", async () => {
+  render(<MultipleWaitForAssertionsElement />);
 
-    await waitFor(() => {
-      expect(screen.getByText("Title")).toBeTruthy();
-      expect(screen.getByText("Description")).toBeTruthy();
-      expect(screen.getByRole("button")).toBeTruthy();
-      expect(screen.queryByText("Loading button")).toBeFalsy();
-    });
+  await waitFor(() => {
+    expect(screen.getByText("Title")).toBeTruthy();
+    expect(screen.getByText("Description")).toBeTruthy();
+    expect(screen.getByRole("button")).toBeTruthy();
+    expect(screen.queryByText("Loading button")).toBeFalsy();
   });
 });

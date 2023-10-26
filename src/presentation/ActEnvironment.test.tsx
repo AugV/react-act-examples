@@ -27,4 +27,5 @@ it("increments number at intervals", async () => {
 
   runTimers();
   await userEvent.click(screen.getByText("2"), { delay: null });
+  expect(screen.getByText("2")).toBeTruthy();
 });

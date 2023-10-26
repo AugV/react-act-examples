@@ -28,7 +28,7 @@ const TimersLoop = () => {
 
 jest.useFakeTimers();
 
-it("increments", async () => {
+it("increments number at intervals", async () => {
   render(<TimersLoop />);
 
   expect(screen.getByText("1")).toBeTruthy();
