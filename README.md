@@ -1,3 +1,7 @@
+# The code is available on Stackblitz
+
+[Stackblitz playground](https://stackblitz.com/~/github.com/AugV/react-act-examples)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
