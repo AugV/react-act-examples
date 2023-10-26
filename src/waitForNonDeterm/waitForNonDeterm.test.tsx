@@ -8,7 +8,7 @@ export const TestComponent = () => {
   return (
     <>
       <button
-        onFocus={() => setTimeout(() => setShowTooltip(true), 1000)}
+        onFocus={() => setTimeout(() => setShowTooltip(true), 999)}
         onBlur={() => setShowTooltip(false)}
       >
         First Button
@@ -21,7 +21,7 @@ export const TestComponent = () => {
 };
 
 describe("non-deterministic action and waitFor", () => {
-  it("fails - when action is inside waitFor", async () => {
+  it("❌ fails - when action is inside waitFor", async () => {
     const user = userEvent.setup();
     render(<TestComponent />);
 
@@ -31,17 +31,7 @@ describe("non-deterministic action and waitFor", () => {
     });
   });
 
-  it("succeeds - when action is outside waitFor", async () => {
-    const user = userEvent.setup();
-    render(<TestComponent />);
-
-    await user.tab();
-    await waitFor(async () => {
-      expect(screen.getByText("Ultimate tooltip")).toBeTruthy();
-    });
-  });
-
-  it("fails - when action is outside of waitFor but waitFor has sync callback", async () => {
+  it("✅ succeeds - when action is outside waitFor", async () => {
     const user = userEvent.setup();
     render(<TestComponent />);
 

@@ -22,6 +22,8 @@ it("fetches data", async () => {
 
   render(<DataDisplay req={mockProm} />);
 
+  expect(screen.getByText("Loading...")).toBeTruthy();
+  
   act(() => {
     resolve("Some data from the API");
   });

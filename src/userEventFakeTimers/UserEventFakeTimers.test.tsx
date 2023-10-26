@@ -1,6 +1,7 @@
 import React from "react";
 import { render, screen, act } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { runAbsolutelyAllTimers } from "../utils/runAbsolutelyAllTimers";
 
 const Timers = () => {
   const [content, setContent] = React.useState(1);
@@ -21,7 +22,7 @@ const Timers = () => {
 
 jest.useFakeTimers();
 
-describe("exceeds timeout with async user event (v14)", () => {
+describe("❌ exceeds timeout with async user event (v14)", () => {
   it("increments number at intervals", async () => {
     render(<Timers />);
 
@@ -33,7 +34,7 @@ describe("exceeds timeout with async user event (v14)", () => {
   });
 });
 
-describe("correct", () => {
+describe("✅ correct", () => {
   it("increments number at intervals", async () => {
     render(<Timers />);
 

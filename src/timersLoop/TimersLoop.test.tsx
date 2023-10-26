@@ -7,11 +7,9 @@ const TimersLoop = () => {
 
   React.useEffect(() => {
     const interval = setTimeout(() => {
-      console.log("timeout 1");
       setContent(2);
 
       setTimeout(() => {
-        console.log("timeout 2");
         setContent(3);
       }, 2000);
     }, 3000);
@@ -29,8 +27,8 @@ const TimersLoop = () => {
 
 jest.useFakeTimers();
 
-describe("timersloop tests with act warnings", () => {
-  it("run only first timer", async () => {
+describe("❌ timersloop tests with act warnings", () => {
+  it("runs only the first timer", async () => {
     render(<TimersLoop />);
 
     expect(screen.getByText("1")).toBeTruthy();
@@ -43,7 +41,7 @@ describe("timersloop tests with act warnings", () => {
   });
 });
 
-describe("timersloop correct tests", () => {
+describe("✅ timersloop correct tests", () => {
   it("runs all timers", async () => {
     render(<TimersLoop />);
 

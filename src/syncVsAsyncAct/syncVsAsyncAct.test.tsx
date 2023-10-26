@@ -22,7 +22,9 @@ describe("sync vs async act", () => {
       });
 
     render(<DataDisplay req={mockProm} />);
-
+    
+    expect(screen.getByText("Loading...")).toBeTruthy();
+    
     act(() => {
       resolve("Some data from the API");
     });
@@ -41,6 +43,8 @@ describe("sync vs async act", () => {
 
     render(<DataDisplay req={mockProm} />);
 
+    expect(screen.getByText("Loading...")).toBeTruthy();
+    
     await act(async () => {
       resolve("Some data from the API");
     });

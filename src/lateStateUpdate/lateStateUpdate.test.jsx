@@ -38,6 +38,7 @@ describe("Late state update causes act warning", () => {
   const email = "bob.bobberson@gmail.com";
   let emailInput, submitButton;
   
+  // This beforeEach is not a good practice - it's here because we want to emphasize only the diffs of test blocks  
   beforeEach(() => {
     jest.clearAllMocks();
     render(<NewsletterForm updateNewsletter={updateNewsletter} />);
