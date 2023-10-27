@@ -23,9 +23,9 @@ it("fetches data", async () => {
   render(<DataDisplay req={fetchDataMock} />);
 
   expect(screen.getByText("Loading...")).toBeTruthy();
-  
+
   act(() => {
-    resolveFetchPromise("Some data from the API");
+    resolveFetchPromise!("Some data from the API");
   });
 
   expect(screen.getByText("Data: Some data from the API")).toBeTruthy();

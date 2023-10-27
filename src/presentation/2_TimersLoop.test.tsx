@@ -2,18 +2,22 @@ import React from "react";
 import { render, screen, act } from "@testing-library/react";
 
 const TimersLoop = () => {
-  const [content, setContent] = React.useState(0);
+  const [content, setContent] = React.useState("initial state");
 
   React.useEffect(() => {
     setTimeout(() => {
-      setContent(2);
-    }, 2000);
+      setContent("intermediate state");
+
+      setTimeout(() => {
+        setContent("sub intermediate state");
+      }, 1000);
+    }, 1000);
   }, []);
 
   React.useEffect(() => {
     content &&
       setTimeout(() => {
-        setContent(8);
+        setContent("final state");
       }, 2000);
   }, [content]);
 
@@ -31,11 +35,11 @@ it("increments number at intervals", async () => {
   jest.useFakeTimers();
   render(<TimersLoop />);
 
-  expect(screen.getByText("0")).toBeTruthy();
+  expect(screen.getByText("initial state")).toBeTruthy();
 
   await act(async () => {
     jest.runAllTimers();
   });
 
-  expect(screen.getByText("8")).toBeTruthy();
+  expect(screen.getByText("final state")).toBeTruthy();
 });
