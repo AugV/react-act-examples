@@ -7,18 +7,14 @@ const TimersLoop = () => {
   React.useEffect(() => {
     setTimeout(() => {
       setContent("intermediate state");
-
-      setTimeout(() => {
-        setContent("sub intermediate state");
-      }, 1000);
-    }, 1000);
+    }, 2000);
   }, []);
 
   React.useEffect(() => {
     content &&
       setTimeout(() => {
         setContent("final state");
-      }, 2000);
+      }, 1000);
   }, [content]);
 
   return (
@@ -32,12 +28,11 @@ const TimersLoop = () => {
 jest.useFakeTimers();
 
 it("increments number at intervals", async () => {
-  jest.useFakeTimers();
   render(<TimersLoop />);
 
   expect(screen.getByText("initial state")).toBeTruthy();
 
-  await act(async () => {
+  act(() => {
     jest.runAllTimers();
   });
 
