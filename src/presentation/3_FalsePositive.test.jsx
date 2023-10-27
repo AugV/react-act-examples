@@ -15,7 +15,7 @@ const ToggleContent = () => {
           }, 500); 
         }}
       >
-        Toggle content
+        Toggle
       </button>
       {isContentVisible ? <div>Content</div> : null}
     </div>
