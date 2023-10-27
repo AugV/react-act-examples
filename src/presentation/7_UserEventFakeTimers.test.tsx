@@ -14,7 +14,7 @@ const Timers = () => {
   return (
     <div>
       <p>Timers</p>
-      <p>{content}</p>
+      <button>{content}</button>
     </div>
   );
 };
@@ -29,4 +29,6 @@ it("increments number at intervals", async () => {
   });
 
   await userEvent.click(await screen.findByText("2"));
+
+  // ... remaining test code
 });
