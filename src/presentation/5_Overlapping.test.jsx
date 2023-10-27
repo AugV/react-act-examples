@@ -29,7 +29,9 @@ it("increments number at intervals", async () => {
     expect(screen.getByText("1")).toBeTruthy();
   });
 
-
+  await act(async () => {
+    jest.runOnlyPendingTimers();
+  });
 
   expect(screen.getByText("2")).toBeTruthy();
 });
