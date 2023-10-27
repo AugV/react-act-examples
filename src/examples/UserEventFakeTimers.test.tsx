@@ -1,7 +1,6 @@
 import React from "react";
 import { render, screen, act } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { runAbsolutelyAllTimers } from "../utils/runAbsolutelyAllTimers";
 
 const Timers = () => {
   const [content, setContent] = React.useState(1);
@@ -43,5 +42,17 @@ describe("✅ correct", () => {
     });
 
     await userEvent.click(screen.getByText("2"), { delay: null });
+  });
+
+  it("increments number at intervals", async () => {
+    render(<Timers />);
+
+    const user = userEvent.setup({advanceTimers:jest.runOnlyPendingTimers})
+
+    act(() => {
+      jest.runOnlyPendingTimers();
+    });
+
+    await user.click(screen.getByText("2"));
   });
 });

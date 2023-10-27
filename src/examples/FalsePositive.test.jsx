@@ -2,21 +2,19 @@ import React from "react";
 import { userEvent } from "@testing-library/user-event";
 import { render, screen, waitFor } from "@testing-library/react";
 
-const NoAwait = () => {
+const ToggleContent = () => {
   const [isContentVisible, setIsContentVisible] = React.useState(false);
 
   return (
     <div>
-      <p>NoAwait</p>
       <button
         onClick={() => {
           setTimeout(() => {
-            // intentionally incorrect
-            setIsContentVisible(true);
-          }, 500);
+            setIsContentVisible(prev => !prev);
+          }, 500); 
         }}
       >
-        Toggle content
+        Toggle
       </button>
       {isContentVisible ? <div>Content</div> : null}
     </div>
@@ -27,36 +25,38 @@ const NoAwait = () => {
 
 describe("❌ false positive when not awaiting waitFor", () => {
   it("toggles content on button click", async () => {
-    render(<NoAwait />);
-
+    render(<ToggleContent />);
+  
+    expect(screen.queryByText("Content")).toBeFalsy();
+    
     await userEvent.click(screen.getByRole("button"));
+  
+    expect(screen.queryByText("Content")).toBeTruthy();
+  });
 
-    await waitFor(() => {
-      expect(screen.getByText("Content")).toBeTruthy();
-    });
-
+  it("a fix which results in a false positive", async () => {
+    render(<ToggleContent />);
+  
+    expect(screen.queryByText("Content")).toBeFalsy();
+    
     await userEvent.click(screen.getByRole("button"));
-
+  
     waitFor(() => {
-      expect(screen.queryByText("Content")).toBeFalsy();
-    });
+      expect(screen.queryByText("Content")).toBeTruthy();
+    })
   });
 });
 
 describe("✅ test detects the bug and fails when awaiting waitFor", () => {
   it("toggles content on button click", async () => {
-    render(<NoAwait />);
-
+    render(<ToggleContent />);
+  
+    expect(screen.queryByText("Content")).toBeFalsy();
+    
     await userEvent.click(screen.getByRole("button"));
-
+  
     await waitFor(() => {
-      expect(screen.getByText("Content")).toBeTruthy();
-    });
-
-    await userEvent.click(screen.getByRole("button"));
-
-    await waitFor(async () => {
-      expect(screen.queryByText("Content")).toBeFalsy();
-    });
+      expect(screen.queryByText("Content")).toBeTruthy();
+    })
   });
 });

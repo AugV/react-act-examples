@@ -1,6 +1,6 @@
 import React from "react";
 import { render } from "@testing-library/react";
-import Popper from "../renderAct/Popper";
+import Popper from "../examples/Popper";
 
 const RenderAct = () => {
   const popperRef = React.useRef(null);

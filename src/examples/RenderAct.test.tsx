@@ -31,3 +31,8 @@ it("✅ act warning is fixed by wrapping render with async act", async () => {
     render(<RenderAct />);
   });
 });
+
+it("✅ or flushing tasks after render", async () => {
+  render(<RenderAct />);
+  await act(async () => {});
+});

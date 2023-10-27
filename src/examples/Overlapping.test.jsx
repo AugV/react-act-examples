@@ -1,5 +1,6 @@
 import React from "react";
 import { render, screen, act, waitFor } from "@testing-library/react";
+import { Simulate } from "react-dom/test-utils";
 
 const Timers = () => {
   const [content, setContent] = React.useState(1);
@@ -33,6 +34,23 @@ describe("❌ overlapping act calls", () => {
 
     expect(screen.getByText("2")).toBeTruthy();
   });
+
+  it("increments number at intervals", async () => {
+    render(<Timers />);
+    const clickButton = async (element) => {
+      return act(async () => {
+        Simulate.click(element);
+      })
+    }
+    
+    clickButton(screen.getByRole('button'))
+  
+    await act(async () => {
+      jest.runOnlyPendingTimers();
+    });
+  
+    expect(screen.getByText("2")).toBeTruthy();
+  });
 });
 
 describe("✅ act calls do not overlap when awaited", () => {
@@ -46,6 +64,23 @@ describe("✅ act calls do not overlap when awaited", () => {
       jest.runOnlyPendingTimers();
     });
 
+    expect(screen.getByText("2")).toBeTruthy();
+  });
+
+  it("increments number at intervals", async () => {
+    render(<Timers />);
+    const clickButton = async (element) => {
+      return act(async () => {
+        Simulate.click(element);
+      })
+    }
+    
+    await clickButton(screen.getByRole('button'))
+  
+    await act(async () => {
+      jest.runOnlyPendingTimers();
+    });
+  
     expect(screen.getByText("2")).toBeTruthy();
   });
 });
